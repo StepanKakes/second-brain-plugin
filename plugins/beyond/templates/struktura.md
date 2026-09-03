@@ -12,8 +12,9 @@ muj-brain/
 │   ├── stav.md            co je nastavené a co ne
 │   ├── fathom-stav.json   ledger stažených callů
 │   ├── destilace-stav.md  ledger zdestilovaných souborů
-│   ├── bin/               whisper, ffmpeg, yt-dlp
-│   └── models/            ggml-large-v3-turbo.bin
+│   ├── whisper-zdroj.txt  odkud se whisper prevzal, kdyz uz v pocitaci byl
+│   ├── bin/               whisper, ffmpeg, yt-dlp (nebo odkazy na ne)
+│   └── models/            ggml model, jmeno zavisi na tom, co se naslo
 ├── ja/
 │   ├── profil.md          kdo jsem, co prodávám, komu
 │   ├── hlas.md            style guide, vyrobí /beyond:hlas

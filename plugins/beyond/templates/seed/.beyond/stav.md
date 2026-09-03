@@ -15,4 +15,4 @@ vytvoreno: 2026-09-02
 | Inbox v sync slozce | |
 | Nasaty existujici obsah | |
 | Zaloha na GitHub | |
-| Nocni automatika | |
+| Automatika (co bezi samo a v kolik) | |

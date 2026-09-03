@@ -102,9 +102,19 @@ nahraje.
 ### Etapa 4 z 5: Přepisy a inbox
 
 **Přepisy.** Spusť `scripts/setup-whisper.ps1` (Windows) nebo
-`scripts/setup-whisper.sh` (macOS). Než to pustíš, řekni pravdu: stáhne se
-zhruba **1,7 GB** a je to jednorázové. Za to má přepisy zadarmo, neomezeně
-a nic mu neodchází z počítače.
+`scripts/setup-whisper.sh` (macOS). Skript se **nejdřív podívá, jestli whisper
+a model už v počítači nejsou**. Spousta lidí má transkripční appku (Vowen,
+MacWhisper, superwhisper, Subtitle Edit) a ta si whisper.cpp i model nese
+s sebou. Když se něco najde, brain na to jen ukáže a nestahuje nic.
+
+Než to pustíš, řekni pravdu: **když se nic nenajde, stáhne se zhruba 1,7 GB**
+a je to jednorázové. Za to má přepisy zadarmo, neomezeně a nic mu neodchází
+z počítače.
+
+Až skript doběhne, přečti si jeho výstup a řekni mu, jak to dopadlo: jestli
+se něco převzalo (pak je seznam v `.beyond/whisper-zdroj.txt` a platí, že
+odinstalování té aplikace přepisy rozbije, což se spraví novým spuštěním
+skriptu), nebo jestli se stahovalo. Zapiš to do `.beyond/stav.md`.
 
 Když to selže nebo nechce, zapiš to do `.beyond/stav.md` a jdi dál.
 Není to konec, cally stejně přepisuje Fathom.
@@ -165,9 +175,28 @@ Dopiš `.beyond/stav.md` a ukaž mu **tři věci, které může udělat hned**:
 - `/beyond:dira` — o čem mluví pořád a neudělal o tom obsah,
 - `/beyond:sync` — stáhnout nové cally a zpracovat inbox.
 
-Zmiň, že `/beyond:automatika` umí zapnout noční běh, ale netlač na to.
-
 Drž konec krátký. Po patnácti minutách rozhovoru nikdo nečte odstavce.
+
+## Co má běžet samo
+
+Tohle se **zeptej, neodbývej odkazem na příkaz**. Kdo si to nenastaví teď,
+nenastaví si to nikdy a brain mu za měsíc zastará.
+
+Zeptej se na dvě věci, v tomhle pořadí:
+
+1. **Co má běžet samo.** Tři možnosti, klidně jen jedna nebo žádná:
+   stahování callů z Fathomu (zadarmo, obyčejný skript), večerní zpracování
+   inboxu a destilace (jede přes model, stojí tokeny), týdenní přehled
+   (taky přes model). Řekni tu cenu rovnou, ať se rozhoduje s informací.
+2. **V kolik.** U každé zvolené úlohy se zeptej na denní dobu a nabídni
+   návrh, ať nemusí vymýšlet. Nedávej celé hodiny, 6:47 je lepší než 7:00.
+
+Pak to rovnou zapni přes skill `automatika`, který zná přepínače
+instalátoru i to, co je potřeba ověřit předem (hlavně že prázdný
+`FATHOM_API_KEY` znamená úlohu, co poběží naprázdno).
+
+Když řekne, že nic, je to v pořádku. Zapiš do `.beyond/stav.md`, že si to
+nepřál, a jdi dál. Změnit si to může kdykoli přes `/beyond:automatika`.
 
 ## Záloha
 

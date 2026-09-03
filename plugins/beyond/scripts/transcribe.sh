@@ -18,7 +18,32 @@ JAZYK="${JAZYK:-cs}"
 COOKIES="${COOKIES:-}"
 
 BIN="$BRAIN/.beyond/bin"
-MODEL="$BRAIN/.beyond/models/ggml-large-v3-turbo.bin"
+MODELS="$BRAIN/.beyond/models"
+
+# Model se muze jmenovat ruzne, kdyz ho setup-whisper prevzal z jine aplikace,
+# ktera whisper.cpp uz mela. Bereme ten nejvetsi, ktery je po ruce.
+vyber_model() {
+  local nejlepsi="" nejskore=0 s f
+  shopt -s nullglob
+  for f in "$MODELS"/ggml-*.bin; do
+    [ -f "$f" ] || continue
+    case "$(basename "$f")" in
+      *silero*|*vad*|*encoder*) continue ;;
+      *large-v3-turbo*)         s=90 ;;
+      *large-v3*)               s=80 ;;
+      *large-v2*)               s=70 ;;
+      *large*)                  s=60 ;;
+      *medium*)                 s=50 ;;
+      *small*)                  s=40 ;;
+      *base*)                   s=30 ;;
+      *tiny*)                   s=20 ;;
+      *)                        continue ;;
+    esac
+    if [ "$s" -gt "$nejskore" ]; then nejskore="$s"; nejlepsi="$f"; fi
+  done
+  shopt -u nullglob
+  [ -n "$nejlepsi" ] && echo "$nejlepsi"
+}
 
 find_tool() {
   local name="$1"
@@ -31,7 +56,9 @@ WHISPER="$(find_tool whisper-cli)"
 [ -n "$WHISPER" ] || WHISPER="$(find_tool whisper-cpp)"
 YTDLP="$(find_tool yt-dlp)"
 
-if [ -z "$FFMPEG" ] || [ -z "$WHISPER" ] || [ ! -f "$MODEL" ]; then
+MODEL="$(vyber_model || true)"
+
+if [ -z "$FFMPEG" ] || [ -z "$WHISPER" ] || [ -z "$MODEL" ] || [ ! -f "$MODEL" ]; then
   echo "CHYBI ffmpeg, whisper-cli nebo model. Spust nejdriv setup-whisper.sh."
   exit 1
 fi

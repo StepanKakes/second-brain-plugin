@@ -19,17 +19,48 @@ param(
 $ErrorActionPreference = "Stop"
 
 $BinDir = Join-Path $BrainRoot ".beyond\bin"
-$Model = Join-Path $BrainRoot ".beyond\models\ggml-large-v3-turbo.bin"
+$ModelDir = Join-Path $BrainRoot ".beyond\models"
+$CestaSoubor = Join-Path $BrainRoot ".beyond\whisper-cesta.txt"
+
+# Model se muze jmenovat ruzne, kdyz ho setup-whisper prevzal z jine aplikace,
+# ktera whisper.cpp uz mela. Bereme ten nejvetsi, ktery je po ruce.
+function Skore-Modelu {
+    param([string]$Jmeno)
+    $j = $Jmeno.ToLower()
+    if ($j -match "silero|vad|encoder") { return 0 }
+    if ($j -match "large-v3-turbo")     { return 90 }
+    if ($j -match "large-v3")           { return 80 }
+    if ($j -match "large-v2")           { return 70 }
+    if ($j -match "large")              { return 60 }
+    if ($j -match "medium")             { return 50 }
+    if ($j -match "small")              { return 40 }
+    if ($j -match "base")               { return 30 }
+    if ($j -match "tiny")               { return 20 }
+    return 0
+}
+
+$Model = Get-ChildItem -Path $ModelDir -Filter "ggml-*.bin" -File -ErrorAction SilentlyContinue |
+    Where-Object { (Skore-Modelu $_.Name) -gt 0 } |
+    Sort-Object -Property @{ Expression = { Skore-Modelu $_.Name } } -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
 
 $Ffmpeg = Get-ChildItem -Path $BinDir -Recurse -Filter "ffmpeg.exe" -ErrorAction SilentlyContinue |
     Select-Object -First 1 -ExpandProperty FullName
 if (-not $Ffmpeg) { $Ffmpeg = (Get-Command ffmpeg -ErrorAction SilentlyContinue).Source }
 
+# Whisper muze byt stazeny v brainu, prevzaty z jine aplikace (cesta v
+# .beyond\whisper-cesta.txt, spousti se z mista kvuli DLL vedle nej), nebo v PATH.
 $Whisper = Get-ChildItem -Path $BinDir -Recurse -Filter "whisper-cli.exe" -ErrorAction SilentlyContinue |
     Select-Object -First 1 -ExpandProperty FullName
+if (-not $Whisper -and (Test-Path $CestaSoubor)) {
+    $ulozena = (Get-Content $CestaSoubor -Raw -ErrorAction SilentlyContinue).Trim()
+    if ($ulozena -and (Test-Path $ulozena)) { $Whisper = $ulozena }
+}
+if (-not $Whisper) { $Whisper = (Get-Command whisper-cli -ErrorAction SilentlyContinue).Source }
 
 $YtDlp = Get-ChildItem -Path $BinDir -Recurse -Filter "yt-dlp.exe" -ErrorAction SilentlyContinue |
     Select-Object -First 1 -ExpandProperty FullName
+if (-not $YtDlp) { $YtDlp = (Get-Command yt-dlp -ErrorAction SilentlyContinue).Source }
 
 foreach ($pair in @(@("ffmpeg", $Ffmpeg), @("whisper-cli", $Whisper), @("model", $Model))) {
     if (-not $pair[1] -or -not (Test-Path $pair[1])) {

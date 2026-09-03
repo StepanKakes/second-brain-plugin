@@ -32,8 +32,9 @@ Jde to i z lokální složky, bez GitHubu:
 2. **Kdo jsi.** Šest otázek, jedna po druhé, ne dotazník. Co děláš, komu,
    co lidem opakuješ pořád dokola, v čem jdeš proti proudu.
 3. **Napojení.** Fathom na cally, Beo na Instagram. Obojí volitelné.
-4. **Přepisy a inbox.** Stáhne whisper a napojí složku, do které budeš
-   z telefonu házet hlasovky.
+4. **Přepisy a inbox.** Zprovozní whisper (když ho v počítači už máš,
+   třeba přes transkripční appku, jen na něj ukáže a nic nestahuje)
+   a napojí složku, do které budeš z telefonu házet hlasovky.
 5. **Nasaje tvůj obsah a naučí se tvůj hlas.** Nejdůležitější etapa.
 
 Můžeš to kdykoli přerušit a příště pokračovat tam, kde jsi skončil.
@@ -64,7 +65,7 @@ cokoli, co se dá vyčíst z prvního nastavení.
 | `/beyond:kalendar` | Plán publikací |
 | `/beyond:tyden` | Týdenní přehled |
 | `/beyond:obsah-import` | Natáhne tvůj publikovaný obsah z Instagramu |
-| `/beyond:automatika` | Zapne noční běh na tvém počítači |
+| `/beyond:automatika` | Nastaví, co má brain dělat sám a v kolik |
 
 ## Co potřebuješ
 
@@ -72,7 +73,8 @@ cokoli, co se dá vyčíst z prvního nastavení.
   přes model.
 - **Fathom API klíč**, když chceš stahovat cally sám. Bez něj plugin funguje.
 - **Zhruba 2 GB na disku** na model pro přepisy. Jednorázově, stáhne to
-  `/beyond:init`.
+  `/beyond:init`. Když už nějakou transkripční appku máš (Vowen, MacWhisper,
+  superwhisper, Subtitle Edit), brain si model půjčí od ní a nestáhne nic.
 
 Přepisy jedou lokálně přes whisper.cpp, takže **nestojí nic a nic neodchází
 z tvého počítače.** Gemini klíč je volitelný a potřebuješ ho, jen když chceš
