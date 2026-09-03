@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "beyond",
+  "description": "Beyond Brain — druhy mozek pro tvurce obsahu. Cally, destilace, napady a plan publikaci, lokalne na tvem disku.",
+  "owner": {
+    "name": "Beyond",
+    "email": "tim@growbeyond.cz"
+  },
+  "plugins": [
+    {
+      "name": "beyond",
+      "description": "Postavi ti na disku vlastni brain: stahuje cally z Fathomu, prepisuje hlasovky a videa lokalne, destiluje je do znalosti a dela z nich napady, story a plan publikaci. Bez serveru, bez povinneho GitHubu.",
+      "author": {
+        "name": "Beyond"
+      },
+      "category": "productivity",
+      "source": "./plugins/beyond"
+    }
+  ]
+}

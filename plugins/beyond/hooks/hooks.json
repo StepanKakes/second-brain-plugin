@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[beyond] Rozhodni podle slozky, ve ktere jsi. (A) Je tu .beyond/ nebo CLAUDE.md s radkem 'beyond-brain:' -> jsi v Beyond brainu. Zjisti, kolik souboru ceka v _inbox/ a jak stary je posledni soubor v cally/. Kdyz neco ceka, rekni to JEDNOU VETOU a nabidni /beyond:sync. Kdyz je cisto, nerikej nic. (B) Slozka je prazdna nebo je v ni jen .git -> uzivatel prave nainstaloval Beyond plugin. Pozdrav ho tremi vetami: brain je nainstalovany, nastaveni trva asi 15 minut a zepta se te na par veci o tom, co delas a jak mluvis, a nabidni /beyond:init. (C) Cokoli jineho, treba cizi projekt nebo kod -> mlc a necekej. Nabidka brainu nesmi rusit praci na necem jinem.\""
+          }
+        ]
+      }
+    ]
+  }
+}

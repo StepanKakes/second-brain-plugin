@@ -1,0 +1,17 @@
+{
+  "name": "beyond",
+  "description": "Druhy mozek pro tvurce obsahu. Postavi ti na disku vlastni brain, stahuje cally z Fathomu, prepisuje hlasovky a videa lokalne, destiluje je do znalosti a dela z nich napady, story a plan publikaci.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Beyond",
+    "email": "tim@growbeyond.cz"
+  },
+  "homepage": "https://growbeyond.cz",
+  "keywords": [
+    "second-brain",
+    "content",
+    "instagram",
+    "transcription",
+    "obsidian"
+  ]
+}
